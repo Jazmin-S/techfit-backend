@@ -1,23 +1,23 @@
 # TechFit Backend
 
-Este repositorio contiene el **backend del sistema TechFit**, desarrollado con **Spring Boot** y expuesto como una **API REST**.  
+En este repositorio pusimos todo el **backend del sistema TechFit**, que desarrollamos con **Spring Boot** y expusimos como una **API REST**.  
 El backend es el encargado de manejar toda la lógica del sistema, la persistencia de datos y la comunicación con el frontend.
 
 El sistema administra información de **usuarios** y **ejercicios físicos**, utiliza una base de datos **PostgreSQL alojada en Neon** y se encuentra **desplegado en Render utilizando Docker**, lo que permite que la aplicación esté disponible en línea.
 
-Este proyecto fue desarrollado como parte de la materia **Desarrollo Web**.
+Este proyecto lo desarrollamos como proyecto para la materia de **Desarrollo Web**.
 
 ---
 
 ## Tecnologías utilizadas
 
-Para el desarrollo del backend se utilizaron las siguientes tecnologías y herramientas:
+Para el desarrollo del backend se utilizaron las siguientes tecnologías y herramientas para lograr el funcionamiento del sistema:
 
 - **Java 17**  
-  Lenguaje de programación principal del proyecto.
+  Es el lenguaje de programación principal del proyecto.
 
 - **Spring Boot**  
-  Framework que facilita la creación de aplicaciones backend y APIs REST.
+  Es el framework que usamos que nos facilita la creación de aplicaciones backend y APIs REST.
 
 - **Spring Data JPA**  
   Permite el acceso a datos mediante entidades y repositorios.
@@ -41,7 +41,7 @@ Para el desarrollo del backend se utilizaron las siguientes tecnologías y herra
 
 ## Repositorio del Backend
 
-El código fuente del backend se encuentra disponible en GitHub en el siguiente enlace:
+Todo el código fuente del backend del proyecto está disponible en GitHub en el siguiente repositorio:
 
 https://github.com/Jazmin-S/techfit-backend.git
 
@@ -69,13 +69,13 @@ GET https://techfit-backend.onrender.com/usuarios
 
 ## Despliegue del backend en Render
 
-Para publicar el backend en Render se realizaron los siguientes pasos:
+Para publicar el backend en Render realizamos los siguientes pasos:
 
-1. Ingresar a https://render.com  
-2. Crear un **New Web Service**  
-3. Conectar el repositorio de GitHub:
+1. Ingresamos a https://render.com  
+2. Creamos un **New Web Service**  
+3. Conectamos el repositorio de GitHub:
    - Jazmin-S / techfit-backend  
-4. Configurar el servicio con:
+4. Configuramos el servicio con:
    - Runtime: Docker  
    - Branch: main  
 5. Render detecta automáticamente el archivo `Dockerfile` y realiza el despliegue  
@@ -117,12 +117,12 @@ Para ejecutar el proyecto de manera local se necesita:
 
 ### Ejecución del backend con Maven
 
-1. Clonar el repositorio:
+1. Clonamos el repositorio:
 
 git clone https://github.com/Jazmin-S/techfit-backend.git  
 cd techfit-backend  
 
-2. Configurar el archivo `application.properties` con los datos de la base de datos local:
+2. Configuramos el archivo `application.properties` con los datos de la base de datos local:
 
 spring.datasource.url=jdbc:postgresql://localhost:5432/techfit  
 spring.datasource.username=postgres  
@@ -132,7 +132,7 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true  
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect  
 
-3. Ejecutar el proyecto:
+3. Ejecutamos el proyecto:
 
 mvn spring-boot:run  
 
@@ -144,11 +144,11 @@ http://localhost:8080/api
 
 ### Ejecución del backend con Docker en local
 
-1. Construir la imagen Docker:
+1. Construimos la imagen Docker:
 
 docker build -t techfit-backend .
 
-2. Ejecutar el contenedor Docker:
+2. Ejecutamos el contenedor Docker con este comando:
 
 docker run -p 8080:8080 \
 -e SPRING_DATASOURCE_URL=jdbc:postgresql://<host>.neon.tech/neondb?sslmode=require \
@@ -211,7 +211,7 @@ Los repositorios extienden de `JpaRepository`, lo que permite realizar operacion
 
 ## Cumplimiento de la rúbrica
 
-Este proyecto cumple con los siguientes puntos solicitados:
+El proyecto cumple con los siguientes puntos solicitados en la rúbrica del proyecto final:
 
 - Backend publicado en GitHub  
 - Documentación clara del despliegue  
