@@ -1,29 +1,29 @@
-package mx.uv.listi.techfit.dto;
-
+package mx.uv.listi.techfit.dto; 
 /**
- * Objeto de transferencia para el login.
+ * LoginRequest: recibir los datos del login desde el frontend.
  */
+
 public class LoginRequest {
 
-    private String correo;
-    private String contrasena;
+    private String correo; 
+    private String contrasena; 
 
-    public LoginRequest() {
-    }
+    public LoginRequest() { // Constructor vacío: Spring lo usa para poder crear el objeto automáticamente desde JSON
+    } 
 
-    public String getCorreo() {
-        return correo;
-    }
+    public String getCorreo() { // Getter: permite leer el valor
+        return correo; 
+    } 
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
+    public void setCorreo(String correo) { // Setter: permite asignar un valor
+        this.correo = correo; 
+    } 
 
-    public String getContrasena() {
-        return contrasena;
-    }
+    public String getContrasena() { 
+        return contrasena; 
+    } 
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
+    public void setContrasena(String contrasena) { 
+        this.contrasena = contrasena; 
+    } 
 }

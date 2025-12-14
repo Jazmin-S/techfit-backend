@@ -1,113 +1,110 @@
-package mx.uv.listi.techfit.controller;
+package mx.uv.listi.techfit.controller; 
 
-import java.util.List;
-import java.util.Map;
+import java.util.List; 
+import java.util.Map;  
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;      
+import org.springframework.http.ResponseEntity;  
+import org.springframework.web.bind.annotation.*; 
 
-import mx.uv.listi.techfit.model.Ejercicio;
-import mx.uv.listi.techfit.repository.EjercicioRepository;
-import mx.uv.listi.techfit.repository.UsuarioRepository;
+import mx.uv.listi.techfit.model.Ejercicio; 
+import mx.uv.listi.techfit.repository.EjercicioRepository; 
+import mx.uv.listi.techfit.repository.UsuarioRepository;   
 
 /**
- * Controlador de Ejercicios.
- * NOTA IMPORTANTE:
- * - NO usamos @RequestMapping("/api") aquí
- * - Porque YA tenemos: server.servlet.context-path=/api
- * Entonces las rutas finales quedan como:
- *   GET    /api/ejercicios
- *   POST   /api/ejercicios
- *   PUT    /api/ejercicios/{id}
- *   DELETE /api/ejercicios/{id}
+ * Controlador de Ejercicios (maneja rutas relacionadas a ejercicios).
  */
-@RestController
-@CrossOrigin(
-    origins = {
-        "http://localhost:5173",
-        "https://TU_USUARIO.github.io" // cámbialo cuando tengas Pages
+
+@RestController // Esta clase expone endpoints REST y responde normalmente en JSON
+
+@CrossOrigin(   // Permite que el frontend pueda hacer peticiones sin bloqueo CORS
+    origins = { 
+        "http://localhost:5173",          
+        "https://TU_USUARIO.github.io"    
     }
 )
+
 public class EjercicioController {
 
-    private final EjercicioRepository ejercicioRepo;
-    private final UsuarioRepository usuarioRepo;
+    private final EjercicioRepository ejercicioRepo; // Dependencia para operar CRUD de Ejercicio en la BD
+    private final UsuarioRepository usuarioRepo;     // Dependencia para consultar usuarios y validar si son admin
 
     public EjercicioController(EjercicioRepository ejercicioRepo, UsuarioRepository usuarioRepo) {
-        this.ejercicioRepo = ejercicioRepo;
-        this.usuarioRepo = usuarioRepo;
+        this.ejercicioRepo = ejercicioRepo; 
+        this.usuarioRepo = usuarioRepo;     
     }
 
-    // GET /api/ejercicios?tipoUsuario=general
-    @GetMapping("/ejercicios")
-    public List<Ejercicio> listar(@RequestParam String tipoUsuario) {
-        return ejercicioRepo.findByTipoUsuario(tipoUsuario);
+    
+    @GetMapping("/ejercicios") // Define que este método responde a GET /ejercicios
+    public List<Ejercicio> listar(@RequestParam String tipoUsuario) { 
+        return ejercicioRepo.findByTipoUsuario(tipoUsuario); 
     }
 
-    // POST /api/ejercicios (SOLO ADMIN)
-    @PostMapping("/ejercicios")
-    public ResponseEntity<?> crear(
-            @RequestHeader(value = "X-USER-ID", required = false) Long userId,
-            @RequestBody Ejercicio ejercicio
+    //(SOLO ADMIN) // Endpoint para crear ejercicios.
+    @PostMapping("/ejercicios") 
+    public ResponseEntity<?> crear( 
+            @RequestHeader(value = "X-USER-ID", required = false) Long userId, // Toma el id del usuario desde header (si viene)
+            @RequestBody Ejercicio ejercicio 
     ) {
-        if (!esAdmin(userId)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(Map.of("message", "No autorizado: solo administradores"));
+        if (!esAdmin(userId)) { // Si el usuario NO es admin, lo bloqueamos
+            return ResponseEntity.status(HttpStatus.FORBIDDEN) 
+                    .body(Map.of("message", "No autorizado: solo administradores")); 
         }
 
-        ejercicio.setId(null);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ejercicioRepo.save(ejercicio));
+        ejercicio.setId(null); // Asegura que sea el ejrcicio sea “nuevo” (para que JPA lo inserte y no intente actualizar)
+        return ResponseEntity.status(HttpStatus.CREATED).body(ejercicioRepo.save(ejercicio)); 
     }
 
-    // PUT /api/ejercicios/{id} (SOLO ADMIN)
-    @PutMapping("/ejercicios/{id}")
+    // (SOLO ADMIN) Endpoint para actualizar un ejercicio por id.
+    @PutMapping("/ejercicios/{id}") 
     public ResponseEntity<?> actualizar(
-            @RequestHeader(value = "X-USER-ID", required = false) Long userId,
-            @PathVariable Long id,
+            @RequestHeader(value = "X-USER-ID", required = false) Long userId, 
+            @PathVariable Long id, 
             @RequestBody Ejercicio body
     ) {
-        if (!esAdmin(userId)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(Map.of("message", "No autorizado: solo administradores"));
+        if (!esAdmin(userId)) { // Si no es admin, no lo dejamos editar
+            return ResponseEntity.status(HttpStatus.FORBIDDEN) 
+                    .body(Map.of("message", "No autorizado: solo administradores")); 
         }
 
-        return ejercicioRepo.findById(id)
-                .<ResponseEntity<?>>map(e -> {
-                    e.setNombre(body.getNombre());
-                    e.setDuracion(body.getDuracion());
-                    e.setNivel(body.getNivel());
-                    e.setObjetivo(body.getObjetivo());
-                    e.setRecomendaciones(body.getRecomendaciones());
-                    e.setTipoUsuario(body.getTipoUsuario());
-                    return ResponseEntity.ok(ejercicioRepo.save(e));
+        return ejercicioRepo.findById(id) // Busca el ejercicio en BD por id
+                .<ResponseEntity<?>>map(e -> { 
+                    e.setNombre(body.getNombre());                     
+                    e.setDuracion(body.getDuracion());                 
+                    e.setNivel(body.getNivel());                       
+                    e.setObjetivo(body.getObjetivo());                 
+                    e.setRecomendaciones(body.getRecomendaciones());   
+                    e.setTipoUsuario(body.getTipoUsuario());           
+                    return ResponseEntity.ok(ejercicioRepo.save(e));   
                 })
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(Map.of("message", "Ejercicio no encontrado")));
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND) 
+                        .body(Map.of("message", "Ejercicio no encontrado"))); 
     }
 
-    // DELETE /api/ejercicios/{id} (SOLO ADMIN)
-    @DeleteMapping("/ejercicios/{id}")
-    public ResponseEntity<?> eliminar(
-            @RequestHeader(value = "X-USER-ID", required = false) Long userId,
-            @PathVariable Long id
+    // Endpoint para borrar por id, solo admins
+    @DeleteMapping("/ejercicios/{id}") 
+    public ResponseEntity<?> eliminar( 
+            @RequestHeader(value = "X-USER-ID", required = false) Long userId, 
+            @PathVariable Long id 
     ) {
-        if (!esAdmin(userId)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(Map.of("message", "No autorizado: solo administradores"));
+        if (!esAdmin(userId)) { // Si el usuario no es admin, lo bloqueamos
+            return ResponseEntity.status(HttpStatus.FORBIDDEN) 
+                    .body(Map.of("message", "No autorizado: solo administradores")); 
         }
 
-        if (!ejercicioRepo.existsById(id)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(Map.of("message", "Ejercicio no encontrado"));
+        if (!ejercicioRepo.existsById(id)) { // Verifica si el ejercicio existe antes de borrar.
+            return ResponseEntity.status(HttpStatus.NOT_FOUND) 
+                    .body(Map.of("message", "Ejercicio no encontrado")); 
         }
 
-        ejercicioRepo.deleteById(id);
-        return ResponseEntity.noContent().build();
+        ejercicioRepo.deleteById(id); // Borra el ejercicio de la BD por id
+        return ResponseEntity.noContent().build(); 
     }
 
-    private boolean esAdmin(Long userId) {
+    private boolean esAdmin(Long userId) { // Método privado: solo lo usa este controller para validar permisos
         if (userId == null) return false;
-        return usuarioRepo.findById(userId).map(u -> u.isEsAdmin()).orElse(false);
+        return usuarioRepo.findById(userId) 
+                .map(u -> u.isEsAdmin())    
+                .orElse(false);          
     }
 }

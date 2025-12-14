@@ -1,66 +1,108 @@
-package mx.uv.listi.techfit.model;
+package mx.uv.listi.techfit.model; 
 
-import jakarta.persistence.*;
+import jakarta.persistence.*; // Importa anotaciones JPA para mapear la clase a una tabla
 
 /**
- * Entidad Ejercicio.
- * Sirve para guardar el catálogo en BD y que el frontend lo consuma.
+ * Ejercicio: Esta clase representa un ejercicio dentro del sistema. 
  */
-@Entity
-public class Ejercicio {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Entity // Esta clase se guarda como tabla en la base de datos
+@Table(name = "ejercicio") // Nombre de la tabla 
 
-    private String nombre;
-    private String duracion;
-    private String nivel;
+public class Ejercicio { 
 
-    @Column(length = 1000)
-    private String objetivo;
+    @Id // (Identificador único)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Long id; 
 
-    @Column(length = 2000)
-    private String recomendaciones;
+    @Column(nullable = false) // Indica que este campo no debería ir vacío 
+    private String nombre; 
 
-    private String videoUrl;
+    private String duracion; // Duración del ejercicio 
+
+    private String nivel; // Nivel recomendado 
+
+    @Column(length = 500) // Da espacio extra por si el texto es largo
+    private String objetivo; 
+
+    @Column(length = 1000) 
+    private String recomendaciones; // Consejos o recomendaciones 
+
+    @Column(nullable = false) // Filtrar
+    private String tipoUsuario; 
 
 
-    /**
-     * Para qué tipo de usuario es el ejercicio:
-     * general | rehabilitacion | adulto_mayor
-     */
-    private String tipoUsuario;
+    private String videoUrl; // Link del video 
 
-    public Ejercicio() {}
+    public Ejercicio() {
+    } 
 
-    // ===== GETTERS / SETTERS =====
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // =========================
+    // GETTERS Y SETTERS
+    // =========================
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public Long getId() { 
+        return id; 
+    } 
 
-    public String getDuracion() { return duracion; }
-    public void setDuracion(String duracion) { this.duracion = duracion; }
+    public void setId(Long id) { 
+        this.id = id; 
+    } 
 
-    public String getNivel() { return nivel; }
-    public void setNivel(String nivel) { this.nivel = nivel; }
+    public String getNombre() { 
+        return nombre; 
+    } 
 
-    public String getObjetivo() { return objetivo; }
-    public void setObjetivo(String objetivo) { this.objetivo = objetivo; }
+    public void setNombre(String nombre) { 
+        this.nombre = nombre;
+    } 
 
-    public String getRecomendaciones() { return recomendaciones; }
-    public void setRecomendaciones(String recomendaciones) { this.recomendaciones = recomendaciones; }
+    public String getDuracion() {
+        return duracion; 
+    } 
 
-    public String getTipoUsuario() { return tipoUsuario; }
-    public void setTipoUsuario(String tipoUsuario) { this.tipoUsuario = tipoUsuario; }
+    public void setDuracion(String duracion) { 
+        this.duracion = duracion; 
+    } 
+
+    public String getNivel() { 
+        return nivel;
+    } 
+
+    public void setNivel(String nivel) { 
+        this.nivel = nivel; 
+    } 
+
+    public String getObjetivo() {
+        return objetivo; 
+    } 
+
+    public void setObjetivo(String objetivo) { 
+        this.objetivo = objetivo; 
+    }
+
+    public String getRecomendaciones() { 
+        return recomendaciones; 
+    } 
+
+    public void setRecomendaciones(String recomendaciones) { 
+        this.recomendaciones = recomendaciones; 
+    } 
+
+    public String getTipoUsuario() { 
+        return tipoUsuario; 
+    } 
+
+    public void setTipoUsuario(String tipoUsuario) { 
+        this.tipoUsuario = tipoUsuario; 
+    } 
 
     public String getVideoUrl() {
         return videoUrl;
-    }
+    } 
 
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
+    public void setVideoUrl(String videoUrl) { 
+        this.videoUrl = videoUrl; 
+    } 
+
 }

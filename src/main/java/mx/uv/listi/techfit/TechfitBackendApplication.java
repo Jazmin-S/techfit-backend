@@ -1,13 +1,16 @@
-package mx.uv.listi.techfit;
+package mx.uv.listi.techfit; 
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.SpringApplication; // Importa la clase que se encarga de levantar Spring Boot
+import org.springframework.boot.autoconfigure.SpringBootApplication; 
 
-@SpringBootApplication
-public class TechfitBackendApplication {
+/**
+ * TechfitBackendApplication: Esta es la clase principal del backend. 
+ */
 
-    public static void main(String[] args) {
-        SpringApplication.run(TechfitBackendApplication.class, args);
-    }
+@SpringBootApplication // Activa configuración automática + escaneo de componentes + configuración base de Spring
+public class TechfitBackendApplication { 
 
-}
+    public static void main(String[] args) { 
+        SpringApplication.run(TechfitBackendApplication.class, args); // Arranca la app
+    } 
+} 

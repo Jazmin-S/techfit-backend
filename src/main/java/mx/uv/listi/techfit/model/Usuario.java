@@ -1,45 +1,39 @@
 package mx.uv.listi.techfit.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 /**
- * Entidad Usuario (tabla: usuario).
- * Agregamos esAdmin para controlar permisos (solo admins pueden crear ejercicios).
+ * Usuario: Esta entidad representa a una persona que puede usar el sistema. 
  */
-@Entity
-public class Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Entity 
+@Table(name = "usuario") 
+public class Usuario { 
 
-    private String nombre;
-    private String correo;
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Long id; // Identificador único del usuario
 
-    /**
-     * Seguridad mínima:
-     * - Se guarda en BD (para tu login simple)
-     * - Pero NO se devuelve en JSON al frontend
-     */
-    @JsonIgnore
-    private String contrasena;
+    @Column(nullable = false) 
+    private String nombre; // Nombre del usuario 
 
-    /**
-     * general | rehabilitacion | adulto_mayor
-     * (Hibernate lo mapea a tipo_usuario)
-     */
-    private String tipoUsuario;
+    @Column(nullable = false, unique = true) 
+    private String correo; // Correo del usuario 
 
-    /**
-     * Nuevo: Admin o no.
-     * (Hibernate lo mapea a es_admin)
-     */
-    private boolean esAdmin;
+    @Column(nullable = false) 
+    private String contrasena; // Contraseña del usuario
 
-    public Usuario() {}
+    @Column(nullable = false)
+    private String tipoUsuario; // Tipo de usuario
 
-    // ===== GETTERS / SETTERS =====
+    @Column(nullable = false) 
+    private boolean esAdmin; // True = admin (puede crear/editar/borrar), False = usuario normal
+
+    public Usuario() { 
+    }
+
+    // Getters y setters 
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -55,6 +49,7 @@ public class Usuario {
     public String getTipoUsuario() { return tipoUsuario; }
     public void setTipoUsuario(String tipoUsuario) { this.tipoUsuario = tipoUsuario; }
 
-    public boolean isEsAdmin() { return esAdmin; }
+    public boolean isEsAdmin() { return esAdmin; } 
     public void setEsAdmin(boolean esAdmin) { this.esAdmin = esAdmin; }
+
 }
