@@ -1,4 +1,4 @@
-# 🏋️‍♂️ TechFit Backend
+# TechFit Backend
 
 Este repositorio contiene el **backend del sistema TechFit**, desarrollado con **Spring Boot** y expuesto como una **API REST**.  
 El backend es el encargado de manejar toda la lógica del sistema, la persistencia de datos y la comunicación con el frontend.
@@ -9,7 +9,7 @@ Este proyecto fue desarrollado como parte de la materia **Desarrollo Web**.
 
 ---
 
-## 🚀 Tecnologías utilizadas
+## Tecnologías utilizadas
 
 Para el desarrollo del backend se utilizaron las siguientes tecnologías y herramientas:
 
@@ -39,7 +39,7 @@ Para el desarrollo del backend se utilizaron las siguientes tecnologías y herra
 
 ---
 
-## 📁 Repositorio del Backend
+## Repositorio del Backend
 
 El código fuente del backend se encuentra disponible en GitHub en el siguiente enlace:
 
@@ -54,7 +54,7 @@ Dentro del repositorio se incluyen los siguientes archivos y carpetas:
 
 ---
 
-## 🌐 Backend desplegado
+## Backend desplegado
 
 El backend está desplegado como un **Web Service en Render**, lo que permite que la API esté disponible públicamente.
 
@@ -67,7 +67,7 @@ GET https://techfit-backend.onrender.com/usuarios
 
 ---
 
-## 🔧 Despliegue del backend en Render
+## Despliegue del backend en Render
 
 Para publicar el backend en Render se realizaron los siguientes pasos:
 
@@ -82,7 +82,7 @@ Para publicar el backend en Render se realizaron los siguientes pasos:
 
 ---
 
-## 🔐 Variables de entorno en Render
+## Variables de entorno en Render
 
 Para la conexión con la base de datos se configuraron variables de entorno en  
 **Settings → Environment**:
@@ -103,9 +103,9 @@ Por seguridad, el usuario y la contraseña **no se incluyen directamente en la U
 
 ---
 
-## 💻 Compilación y ejecución en local
+## Compilación y ejecución en local
 
-### 📋 Requisitos
+### Requisitos
 
 Para ejecutar el proyecto de manera local se necesita:
 
@@ -115,7 +115,7 @@ Para ejecutar el proyecto de manera local se necesita:
 
 ---
 
-### ▶️ Ejecución del backend con Maven
+### Ejecución del backend con Maven
 
 1. Clonar el repositorio:
 
@@ -142,7 +142,7 @@ http://localhost:8080/api
 
 ---
 
-### ▶️ Ejecución del backend con Docker en local
+### Ejecución del backend con Docker en local
 
 1. Construir la imagen Docker:
 
@@ -158,9 +158,9 @@ techfit-backend
 
 ---
 
-## 🧠 Documentación mínima del código
+## Documentación del código
 
-### 📦 Estructura del proyecto
+### Estructura del proyecto
 
 src/main/java/mx/uv/listi/techfit  
 │  
@@ -180,7 +180,7 @@ src/main/java/mx/uv/listi/techfit
 
 ---
 
-### 📌 Controladores
+### Controladores
 
 - **EjercicioController**  
   Contiene los endpoints REST relacionados con la consulta y administración de ejercicios físicos.
@@ -190,7 +190,7 @@ src/main/java/mx/uv/listi/techfit
 
 ---
 
-### 📌 Modelos
+### Modelos
 
 - **Ejercicio**  
   Representa un ejercicio físico dentro del sistema TechFit.
@@ -202,14 +202,14 @@ Ambos modelos están mapeados a tablas de la base de datos mediante **JPA**.
 
 ---
 
-### 📌 Repositorios
+### Repositorios
 
 Los repositorios extienden de `JpaRepository`, lo que permite realizar operaciones  
 **CRUD (crear, leer, actualizar y eliminar)** sin necesidad de escribir consultas SQL manuales.
 
 ---
 
-## ✅ Cumplimiento de la rúbrica
+## Cumplimiento de la rúbrica
 
 Este proyecto cumple con los siguientes puntos solicitados:
 
