@@ -20,7 +20,7 @@ import mx.uv.listi.techfit.repository.UsuarioRepository;
 @CrossOrigin(   // Permite que el frontend pueda hacer peticiones sin bloqueo CORS
     origins = { 
         "http://localhost:5173",          
-        "https://TU_USUARIO.github.io"    
+        "https://jazmin-s.github.io/techfit-frontend"    
     }
 )
 
