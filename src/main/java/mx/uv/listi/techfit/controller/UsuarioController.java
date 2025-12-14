@@ -14,11 +14,12 @@ import mx.uv.listi.techfit.model.Usuario;
 import mx.uv.listi.techfit.repository.UsuarioRepository; 
 
 
+
 @RestController
 @CrossOrigin(   
     origins = { // Lista de sitios permitidos para hacer peticiones
         "http://localhost:5173",       
-        "https://jazmin-s.github.io/techfit-frontend/" 
+        "https://jazmin-s.github.io" 
     }     
 )               
 public class UsuarioController {
